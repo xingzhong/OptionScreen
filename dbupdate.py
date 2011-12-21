@@ -2,6 +2,7 @@ import main as myMain
 import parse as myParse
 import datetime
 
+
 def update(tickers, date):
     for ticker in tickers:
         T = myParse.Parser(ticker)
@@ -15,7 +16,6 @@ def update_db(options, ticker):
         option = options[style]
         for target in option.iterkeys():
             attr = {}
-            #attr["date"] = datetime.datetime.now().date()
             attr["ticker"] = ticker
             attr["target"] = target
             attr["price"]  = option[target]
@@ -24,5 +24,6 @@ def update_db(options, ticker):
                 attr["style"]  = True
             else:
                 attr["style"]  = False
+            attr['key_name'] = '%s%s%s%s'%(ticker,target,maturity,style)
             equity = myMain.Equity(**attr)
             equity.put()

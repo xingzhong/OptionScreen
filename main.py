@@ -9,6 +9,9 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 from google.appengine.ext.webapp import template
 from google.appengine.ext import db
+from google.appengine.api import users
+
+from user import UserHandler
 import dbupdate as myDB
 import parse as myParse
 
@@ -20,7 +23,7 @@ class Equity(db.Model):
     date   = db.DateProperty(auto_now_add=True)
     maturity = db.DateProperty(required=True)
 
-    
+
 class MainHandler(webapp.RequestHandler):
     def get(self):
         debug  = "debug"
@@ -32,9 +35,12 @@ class MainHandler(webapp.RequestHandler):
         self.response.out.write(template.render(path, template_values))
 
 
+
 def main():
-    application = webapp.WSGIApplication([('/', MainHandler)],
-                                         debug=True)
+    application = webapp.WSGIApplication(\
+                                            [('/', MainHandler),\
+                                            ('/user', UserHandler)],\
+                                        debug=True)
     util.run_wsgi_app(application)
 
 
