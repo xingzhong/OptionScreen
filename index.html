@@ -1,0 +1,18 @@
+<html>
+<body>
+	<p>hello world</p>
+	<p> {{debug}}</p>
+	<table >
+	{% for equity in equitys %}
+		<tr>
+		<td> {{equity.ticker}}	</td>
+		<td> {{equity.style}}	</td>
+		<td> {{equity.target}}	</td>
+		<td> {{equity.price}}	</td>
+		<td> {{equity.date}}	</td>
+		<td> {{equity.maturity}}</td>
+		</tr>
+	{% endfor %}
+	</table>
+</body>
+</html>
